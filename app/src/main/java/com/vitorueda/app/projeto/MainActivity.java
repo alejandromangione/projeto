@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import com.vitorueda.app.projeto.com.vitorueda.app.Http.WebServer;
-import com.vitorueda.app.projeto.com.vitorueda.app.Tether.Tether;
+import com.vitorueda.app.projeto.Http.WebServer;
+import com.vitorueda.app.projeto.Tether.Tether;
 
 import java.io.IOException;
 
@@ -38,22 +38,14 @@ public class MainActivity extends Activity {
         sButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTether.toggleTether(mWifiManager, MainActivity.this);
+                //mTether.toggleTether(mWifiManager, MainActivity.this);
+                try {
+                    server.start();
+                } catch(IOException ioe) {
+                    Log.w("MAIN", "The server could not start.");
+                }
             }
         });
-
-        sButton2 = (Button) findViewById(R.id.button_mudaTexto);
-        sButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                server.setMsg("<html><body><h1>FUNCIONA</h1></body></html>");
-            }
-        });
-        try {
-            server.start();
-        } catch(IOException ioe) {
-            Log.w("MAIN", "The server could not start.");
-        }
     }
 
 
